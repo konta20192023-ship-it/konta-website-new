@@ -3,7 +3,8 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
-import { defineConfig, type Plugin, type ViteDevServer } from "vite";
+import { defineConfig, loadEnv, type Plugin, type ViteDevServer } from "vite";
+
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 // =============================================================================
@@ -74,7 +75,7 @@ function writeToLogFile(source: LogSource, entries: unknown[]) {
  * - Files: browserConsole.log, networkRequests.log, sessionReplay.log
  * - Auto-trimmed when exceeding 1MB (keeps newest entries)
  */
-function vitePluginManusDebugCollector(): Plugin {
+function vitePluginManusDebugCollector(env: Record<string, string>): Plugin {
   return {
     name: "manus-debug-collector",
 
@@ -146,43 +147,109 @@ function vitePluginManusDebugCollector(): Plugin {
           }
         });
       });
+
+      // POST /api/contact: Handle contact form submissions
+      server.middlewares.use("/api/contact", (req, res, next) => {
+        if (req.method !== "POST") {
+          return next();
+        }
+
+        let body = "";
+        req.on("data", (chunk) => {
+          body += chunk.toString();
+        });
+
+        req.on("end", async () => {
+          try {
+            const { name, email, message } = JSON.parse(body);
+            if (!name || !email || !message) {
+              res.writeHead(400, { "Content-Type": "application/json" });
+              return res.end(JSON.stringify({ error: "All fields are required." }));
+            }
+
+            // Email configuration (matching server/index.ts)
+            const nodemailer = await import("nodemailer");
+            const transporter = nodemailer.default.createTransport({
+              service: "gmail",
+              auth: {
+                user: env.EMAIL_USER || "konta20192023@gmail.com",
+                pass: env.EMAIL_PASS,
+              },
+            });
+
+            const mailOptions = {
+              from: email,
+              to: "konta20192023@gmail.com",
+              subject: `[Website Inquiry] ${name}`,
+              text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+            };
+
+            if (env.EMAIL_PASS) {
+              await transporter.sendMail(mailOptions);
+              console.log(`Email successfully sent from ${email} to konta20192023@gmail.com`);
+            } else {
+              console.log("Email sending skipped: EMAIL_PASS not set in environment.");
+              console.log("Inquiry details:", { name, email, message });
+            }
+
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ success: true }));
+          } catch (e) {
+            console.error("Error sending email via nodemailer:", e);
+            res.writeHead(500, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Failed to send inquiry email." }));
+          }
+        });
+      });
     },
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
 
-export default defineConfig({
-  plugins,
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  const plugins = [
+    react(),
+    tailwindcss(),
+    jsxLocPlugin(),
+    vitePluginManusRuntime(),
+    vitePluginManusDebugCollector(env),
+  ];
+
+  return {
+    plugins,
+
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "shared"),
+        "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      },
     },
-  },
-  envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    port: 3000,
-    strictPort: false, // Will find next available port if 3000 is busy
-    host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
-    ],
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    envDir: path.resolve(import.meta.dirname),
+    root: path.resolve(import.meta.dirname, "client"),
+    build: {
+      outDir: path.resolve(import.meta.dirname, "dist/public"),
+      emptyOutDir: true,
     },
-  },
+    server: {
+      port: 3000,
+      strictPort: false,
+      host: true,
+      allowedHosts: [
+        ".manuspre.computer",
+        ".manus.computer",
+        ".manus-asia.computer",
+        ".manuscomputer.ai",
+        ".manusvm.computer",
+        "localhost",
+        "127.0.0.1",
+      ],
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
 });
+
