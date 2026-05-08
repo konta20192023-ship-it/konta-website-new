@@ -210,8 +210,6 @@ export default defineConfig(({ mode }) => {
   const plugins = [
     react(),
     tailwindcss(),
-    vitePluginManusRuntime(),
-    vitePluginManusDebugCollector(env),
   ];
 
   return {
