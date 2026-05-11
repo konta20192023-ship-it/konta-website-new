@@ -71,7 +71,7 @@ Email: ${process.env.CONTACT_RECEIVER || "konta20192023@gmail.com"}
 
     return response.status(200).json({ success: true });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error sending email:', JSON.stringify(error, null, 2));
     return response.status(500).json({ error: 'Failed to send inquiry.' });
   }
 }
