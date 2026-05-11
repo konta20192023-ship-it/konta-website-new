@@ -52,13 +52,15 @@ async function startServer() {
       };
 
       await transporter.sendMail(mailOptions);
-      console.log("customer email:", email);
-      await transporter.sendMail({
-        from: emailUser,
-        to: email,
-        subject: "お問い合わせありがとうございます",
-        replyTo: process.env.CONTACT_RECEIVER || "konta20192023@gmail.com",
-        text: `${name} 様
+      try {
+        console.log("customer email:", email);
+
+        const autoReplyResult = await transporter.sendMail({
+          from: `"KONTA Website" <${emailUser}>`,
+          to: email,
+          subject: "お問い合わせありがとうございます",
+          replyTo: process.env.CONTACT_RECEIVER || "konta20192023@gmail.com",
+          text: `${name} 様
 
 この度はお問い合わせいただき、誠にありがとうございます。
 
@@ -69,8 +71,12 @@ async function startServer() {
 KONTA Website
 Email: ${process.env.CONTACT_RECEIVER || "konta20192023@gmail.com"}
 --------------------------------`
-      });
-      console.log("auto reply success");
+        });
+
+        console.log("auto reply success:", autoReplyResult);
+      } catch (autoReplyError) {
+        console.error("auto reply failed:", autoReplyError);
+      }
       console.log(`Email sent from ${email}`);
 
       res.status(200).json({ success: true });
