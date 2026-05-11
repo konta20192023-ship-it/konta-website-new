@@ -50,7 +50,7 @@ export default async function handler(
     console.log("customer email:", email);
 
     await transporter.sendMail({
-      from: `"KONTA Website" <${emailUser}>`,
+      from: `"Konta" <${emailUser}>`,
       to: email,
       subject: "お問い合わせありがとうございます",
       replyTo: process.env.CONTACT_RECEIVER || "konta20192023@gmail.com",
