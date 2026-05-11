@@ -47,6 +47,28 @@ export default async function handler(
 
     await transporter.sendMail(mailOptions);
 
+    console.log("customer email:", email);
+
+    await transporter.sendMail({
+      from: `"KONTA Website" <${emailUser}>`,
+      to: email,
+      subject: "お問い合わせありがとうございます",
+      replyTo: process.env.CONTACT_RECEIVER || "konta20192023@gmail.com",
+      text: `${name} 様
+
+この度はお問い合わせいただき、誠にありがとうございます。
+
+内容を確認のうえ、担当者より折り返しご連絡いたします。
+今しばらくお待ちください。
+
+--------------------------------
+KONTA Website
+Email: ${process.env.CONTACT_RECEIVER || "konta20192023@gmail.com"}
+--------------------------------`
+    });
+
+    console.log("auto reply success");
+
     return response.status(200).json({ success: true });
   } catch (error) {
     console.error('Error sending email:', error);
