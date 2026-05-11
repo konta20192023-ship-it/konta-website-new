@@ -16,24 +16,36 @@ export default async function handler(
   }
 
   try {
+    const emailUser = process.env.EMAIL_USER || 'konta20192023@gmail.com';
+    const emailPass = process.env.EMAIL_PASS;
+
+    if (!emailPass) {
+      console.error('EMAIL_PASS is not set in environment variables.');
+      return response.status(500).json({ error: 'Server configuration error: Mail credentials missing.' });
+    }
+
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
-        user: process.env.EMAIL_USER || 'konta20192023@gmail.com',
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
+      tls: {
+        rejectUnauthorized: false
+      }
     });
 
     const mailOptions = {
-      from: email,
-      to: 'konta20192023@gmail.com',
-      subject: `[Website Inquiry] ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      from: emailUser,
+      to: process.env.CONTACT_RECEIVER || 'konta20192023@gmail.com',
+      replyTo: email,
+      subject: `[문의접수] ${name}님 - KONTA Website`,
+      text: `신규 문의가 접수되었습니다.\n\n이름: ${name}\n이메일: ${email}\n내용:\n${message}\n\n(발송시각: ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Tokyo' })})`,
     };
 
-    if (process.env.EMAIL_PASS) {
-      await transporter.sendMail(mailOptions);
-    }
+    await transporter.sendMail(mailOptions);
 
     return response.status(200).json({ success: true });
   } catch (error) {
