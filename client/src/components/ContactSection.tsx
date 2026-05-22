@@ -231,7 +231,7 @@ export default function ContactSection() {
             <span className="font-['Montserrat'] text-[0.6rem] tracking-[0.25em] text-white/40 uppercase mb-2 font-semibold">
               Business
             </span>
-            {["不動産賃貸業", "民泊・旅館業", "韓国化粧品コンサルティング", "Eコマース・ライブコマース"].map((b) => (
+            {["不動産賃貸業", "民泊・旅館業", "旅行手配サービス", "韓国化粧品コンサルティング", "Eコマース・ライブコマース"].map((b) => (
               <span key={b} className="font-['Noto_Sans_JP'] text-sm font-normal text-white/50 leading-relaxed">
                 {b}
               </span>

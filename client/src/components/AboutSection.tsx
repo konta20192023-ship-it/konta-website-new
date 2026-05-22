@@ -93,7 +93,7 @@ export default function AboutSection() {
         {/* Right: body text + company info table — flex-1 */}
         <div ref={infoRef} className="flex-1 flex flex-col justify-start">
           <p className="font-['Noto_Sans_JP'] text-[0.95rem] md:text-[1rem] font-normal text-[#1a1a1a]/75 leading-[2.1] tracking-wide mb-10">
-            株式会社權田は、不動産賃貸業を基盤に、民泊・旅館業、韓国化粧品コンサルティング、
+            株式会社權田は、不動産賃貸業を基盤に、民泊・旅館業、旅行手配サービス、韓国化粧品コンサルティング、
             AIライブコマースプラットフォームなど、多様な事業を展開しています。
             東京都心・神田神保町を拠点に、地域に根ざしたサービスと革新的なビジネスモデルで、
             新しいライフスタイルの価値を創造し続けています。

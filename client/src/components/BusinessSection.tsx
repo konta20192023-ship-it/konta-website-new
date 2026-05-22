@@ -8,6 +8,7 @@ const REALESTATE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398
 const HOSPITALITY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-hospitality-editorial-4wC3aSwmLwSM2om7nQVQfL.webp";
 const BEAUTY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-beauty-editorial-kALFyiGMGcLjuRFkEg4qag.webp";
 const ECOMMERCE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-ecommerce-editorial-jL6ZEA7UeKRXjbsCnEkgXJ.webp";
+const TRAVEL_IMG = "/konta-travel-editorial.png";
 
 const businesses = [
   {
@@ -28,6 +29,14 @@ const businesses = [
   },
   {
     num: "03",
+    en: "TRAVEL SERVICE",
+    jp: "旅行手配サービス",
+    desc: "国内外の旅行者やビジネス渡航者向けに、航空券や宿泊施設の手配から最適な旅程の提案までサポート。インバウンド観光客のニーズに応える高品質な旅行体験を提供します。",
+    services: ["航空券・ホテル手配", "オーダーメイドツアー", "インバウンド旅行サポート", "ビジネス渡航支援"],
+    img: TRAVEL_IMG,
+  },
+  {
+    num: "04",
     en: "K-BEAUTY",
     jp: "韓国化粧品コンサルティング",
     desc: "「cos:mura」を通じてK-Beautyを日本市場に届けてきた経験を活かし、韓国コスメブランドの日本市場参入から販路開拓まで、トータルサポートを提供します。",
@@ -35,7 +44,7 @@ const businesses = [
     img: BEAUTY_IMG,
   },
   {
-    num: "04",
+    num: "05",
     en: "E-COMMERCE",
     jp: "Eコマース・ライブコマース",
     desc: "AIライブコマースプラットフォームを活用した次世代の販売体験を創造。体験と購買を融合させた新しいショッピングスタイルを提案します。",
@@ -73,15 +82,15 @@ function BusinessCard({ biz, reverse }: { biz: typeof businesses[0]; reverse: bo
   return (
     <div
       ref={ref}
-      className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} border-t border-[#e0ddd8]`}
+      className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} border-t border-[#e0ddd8] md:h-[450px]`}
     >
       {/* Image */}
-      <div className="img-overlay md:w-[48%] lg:w-[45%] shrink-0 aspect-[4/3] md:aspect-auto md:min-h-[360px] overflow-hidden">
+      <div className="img-overlay w-full md:w-[48%] lg:w-[45%] shrink-0 aspect-[4/3] md:aspect-auto md:h-full overflow-hidden">
         <img src={biz.img} alt={biz.jp} className="w-full h-full object-cover" />
       </div>
 
       {/* Text */}
-      <div className={`flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-14 py-10 md:py-14 bg-[#f0efed] ${reverse ? 'md:items-end md:text-right' : ''}`}>
+      <div className={`flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-14 py-10 md:py-0 md:h-full flex-grow bg-[#f0efed] ${reverse ? 'md:items-end md:text-right' : ''}`}>
         {/* Large number watermark — slightly more visible */}
         {/* Number + label row */}
         <div className="flex items-baseline gap-3 mb-4">
@@ -105,7 +114,7 @@ function BusinessCard({ biz, reverse }: { biz: typeof businesses[0]; reverse: bo
         <div className={`w-8 h-[1px] bg-[#1a1a1a]/25 mb-5 ${reverse ? "md:ml-auto" : ""}`} />
 
         {/* Description — larger and darker */}
-        <p className="font-['Noto_Sans_JP'] text-sm font-normal text-[#1a1a1a]/75 leading-[2.0] tracking-wide mb-7 max-w-sm">
+        <p className="font-['Noto_Sans_JP'] text-sm font-normal text-[#1a1a1a]/75 leading-[2.0] tracking-wide mb-7 max-w-[410px]">
           {biz.desc}
         </p>
 
