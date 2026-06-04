@@ -214,14 +214,8 @@ export default function ParkGolf() {
                   desc: "관동 최대 규모를 자랑하며 대형 연못이 있는 매력적인 4개 코스(하다마리, 와카바, 소요카제, 세세라기) 운영."
                 },
                 {
-                  title: (
-                    <>
-                      ③ 나리타 에어포트 시노노메 파크
-                      <br className="md:hidden" />
-                      골프장
-                    </>
-                  ),
-                  className: "text-[18px] xs:text-[20px] sm:text-xl md:text-2xl",
+                  title: <>③ 나리타 에어포트 시노노메 파크골프장</>,
+                  className: "text-[14px] xs:text-[17px] sm:text-xl md:text-2xl",
                   tags: ["36홀", "친선경기", "공항 인접"],
                   desc: "비행기 이착륙을 보며 플레이하는 독특한 경험. 중·상급자를 위한 4개 코스로 구성된 국제대회 규격 구장."
                 }
