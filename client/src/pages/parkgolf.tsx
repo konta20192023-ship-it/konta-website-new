@@ -442,9 +442,12 @@ export default function ParkGolf() {
           <div className="bg-background rounded-3xl p-8 md:p-16 shadow-lg border border-border">
             <div className="text-center mb-12">
               <h3 className="text-3xl md:text-4xl font-serif text-primary mb-4">투어 상세 안내</h3>
-              <div className="inline-block bg-primary/5 text-primary px-6 py-2 rounded-full font-bold text-2xl">
-                1인당 999,000원~ <span className="text-sm font-normal text-muted-foreground ml-2">(30명 출발 기준)</span>
-              </div>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="inline-block bg-primary/5 text-primary hover:bg-primary/10 px-6 py-2.5 rounded-full font-bold text-2xl border border-primary/20 cursor-pointer transition-all duration-300 hover:scale-[1.03] active:scale-[0.98] shadow-sm hover:shadow"
+              >
+                30명출발 기준 <span className="text-muted-foreground font-normal mx-2">/</span> 요금문의
+              </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
@@ -532,12 +535,7 @@ export default function ParkGolf() {
               </Card>
             </motion.div>
 
-            <motion.div variants={fadeInUp} className="pt-12">
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-white hover:text-primary rounded-full px-8 py-6 h-auto text-lg group">
-                상담 문의하기
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
+
           </motion.div>
         </div>
       </section>
