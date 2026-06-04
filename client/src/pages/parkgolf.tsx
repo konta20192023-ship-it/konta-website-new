@@ -202,17 +202,26 @@ export default function ParkGolf() {
             <div className="lg:col-span-5 space-y-12">
               {[
                 {
-                  title: "① 하스누마 해변공원 파크골프장",
+                  title: <>① 하스누마 해변공원 파크골프장</>,
+                  className: "text-[18px] xs:text-[20px] sm:text-xl md:text-2xl",
                   tags: ["36홀", "Par 132", "리조트형"],
                   desc: "구주쿠리 해변 옆에 위치하여 바다와 자연이 어우러진 리조트형 구장. 노기쿠, 키쿄, 히마와리, 야마유리 4개 코스 보유."
                 },
                 {
-                  title: "② 타케에이 에코파크골프 오키도",
+                  title: <>② 타케에이 에코파크골프 오키도</>,
+                  className: "text-[18px] xs:text-[20px] sm:text-xl md:text-2xl",
                   tags: ["36홀", "관동 최대급", "친환경"],
                   desc: "관동 최대 규모를 자랑하며 대형 연못이 있는 매력적인 4개 코스(하다마리, 와카바, 소요카제, 세세라기) 운영."
                 },
                 {
-                  title: "③ 나리타 에어포트 시노노메 파크골프장",
+                  title: (
+                    <>
+                      ③ 나리타 에어포트 시노노메 파크
+                      <br className="md:hidden" />
+                      골프장
+                    </>
+                  ),
+                  className: "text-[18px] xs:text-[20px] sm:text-xl md:text-2xl",
                   tags: ["36홀", "친선경기", "공항 인접"],
                   desc: "비행기 이착륙을 보며 플레이하는 독특한 경험. 중·상급자를 위한 4개 코스로 구성된 국제대회 규격 구장."
                 }
@@ -225,7 +234,7 @@ export default function ParkGolf() {
                   transition={{ delay: i * 0.2, duration: 0.6 }}
                   className="space-y-3"
                 >
-                  <h4 className="text-2xl font-serif text-primary font-bold">{course.title}</h4>
+                  <h4 className={`${course.className} font-serif text-primary font-bold leading-tight`}>{course.title}</h4>
                   <div className="flex flex-wrap gap-2">
                     {course.tags.map(tag => (
                       <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground text-xs font-medium rounded-full">
