@@ -3,6 +3,7 @@
 // Large watermark text, alternating left/right image+text layout
 
 import { useEffect, useRef } from "react";
+import { Link } from "wouter";
 
 const REALESTATE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-realestate-editorial-fHaAxkvbd39avbnHSf5EaE.webp";
 const HOSPITALITY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-hospitality-editorial-4wC3aSwmLwSM2om7nQVQfL.webp";
@@ -79,9 +80,11 @@ function useReveal(delay = 0) {
 
 function BusinessCard({ biz, reverse }: { biz: typeof businesses[0]; reverse: boolean }) {
   const ref = useReveal(0);
+
   return (
     <div
       ref={ref}
+      id={`business-${biz.num}`}
       className={`flex flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"} border-t border-[#e0ddd8] md:h-[450px]`}
     >
       {/* Image */}
@@ -120,14 +123,36 @@ function BusinessCard({ biz, reverse }: { biz: typeof businesses[0]; reverse: bo
 
         {/* Services */}
         <div className={`flex flex-wrap gap-2 ${reverse ? "md:justify-end" : ""}`}>
-          {biz.services.map((s) => (
-            <span
-              key={s}
-              className="font-['Noto_Sans_JP'] text-[0.65rem] font-normal text-[#1a1a1a]/65 border border-[#c8c5c0] px-3 py-1.5 tracking-wide"
-            >
-              {s}
-            </span>
-          ))}
+          {biz.services.map((s) => {
+            if (s === "インバウンド旅行サポート") {
+              return (
+                <div key={s} className="relative group/submenu inline-block">
+                  <span
+                    className="font-['Noto_Sans_JP'] text-[0.65rem] font-normal text-[#1a1a1a]/65 border border-[#c8c5c0] px-3 py-1.5 tracking-wide bg-transparent transition-all duration-300 hover:border-[#1a1a1a]/60 hover:text-[#1a1a1a] cursor-pointer flex items-center gap-1 select-none"
+                  >
+                    {s}
+                    <span className="text-[0.5rem] text-[#1a1a1a]/40 transition-transform duration-300 group-hover/submenu:rotate-180">▼</span>
+                  </span>
+                  {/* Dropdown Menu (Transparent Bridge to prevent hover gap) */}
+                  <div className="absolute left-0 top-full pt-1.5 opacity-0 pointer-events-none group-hover/submenu:opacity-100 group-hover/submenu:pointer-events-auto z-50 min-w-[120px] transition-all duration-200">
+                    <div className="bg-[#f0efed] border border-[#c8c5c0] shadow-md py-2 px-4">
+                      <Link href="/parkgolf" className="block text-[0.65rem] text-[#1a1a1a]/85 hover:text-accent font-medium tracking-wide py-1 whitespace-nowrap transition-colors">
+                        Park Golf
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <span
+                key={s}
+                className="font-['Noto_Sans_JP'] text-[0.65rem] font-normal text-[#1a1a1a]/65 border border-[#c8c5c0] px-3 py-1.5 tracking-wide"
+              >
+                {s}
+              </span>
+            );
+          })}
         </div>
       </div>
     </div>
