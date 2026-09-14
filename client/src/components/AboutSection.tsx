@@ -5,9 +5,9 @@
 
 import { useEffect, useRef } from "react";
 
-const TOKYO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-about-tokyo-cityscape-fZe5qjbgtfUKDdVAW9ubH6.webp";
-const OFFICE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-about-office-interior-kxRzHV3ToToacm8mUmwsum.webp";
-const LIFESTYLE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-about-lifestyle-concept-T24ye2MbtSXVZVh9h9KPzE.webp";
+const TOKYO_IMG = "/about_tokyo.png";
+const OFFICE_IMG = "/hero_panel_1.jpg";
+const LIFESTYLE_IMG = "/main_hero_new.jpg";
 
 function useReveal(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);

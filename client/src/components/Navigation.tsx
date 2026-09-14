@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { Link } from "wouter";
 
-const NEW_LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/kontalogo-new_704ce0b7.png";
+const NEW_LOGO_URL = "/logo.png";
 
 const navItems = [
   { label: "ABOUT", labelJp: "会社概要", href: "#about" },

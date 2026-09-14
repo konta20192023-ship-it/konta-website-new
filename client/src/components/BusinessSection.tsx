@@ -5,10 +5,10 @@
 import { useEffect, useRef } from "react";
 import { Link } from "wouter";
 
-const REALESTATE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-realestate-editorial-fHaAxkvbd39avbnHSf5EaE.webp";
-const HOSPITALITY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-hospitality-editorial-4wC3aSwmLwSM2om7nQVQfL.webp";
-const BEAUTY_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-beauty-editorial-kALFyiGMGcLjuRFkEg4qag.webp";
-const ECOMMERCE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/konta-ecommerce-editorial-jL6ZEA7UeKRXjbsCnEkgXJ.webp";
+const REALESTATE_IMG = "/main_hero_new.jpg";
+const HOSPITALITY_IMG = "/images/onsen.jpg";
+const BEAUTY_IMG = "/hero_panel_2.png";
+const ECOMMERCE_IMG = "/hero_panel_3.png";
 const TRAVEL_IMG = "/konta-travel-editorial.png";
 
 const businesses = [

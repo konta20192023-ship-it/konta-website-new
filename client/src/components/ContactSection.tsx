@@ -5,7 +5,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const FOOTER_LOGO_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/kontalogo22_99c54fc6.png";
+const FOOTER_LOGO_URL = "/logo.png";
 
 function useReveal(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);

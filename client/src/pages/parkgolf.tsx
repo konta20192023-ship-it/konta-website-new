@@ -48,7 +48,7 @@ export default function ParkGolf() {
         <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
           <Link href="/" className="flex items-center shrink-0">
             <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663333770398/ZgHnYJz9Mp4Eb2ccWUmBVo/kontalogo-new_704ce0b7.png"
+              src="/logo.png"
               alt="株式会社權田"
               className="h-12 md:h-18 w-auto object-contain"
               style={{ filter: "none" }}
