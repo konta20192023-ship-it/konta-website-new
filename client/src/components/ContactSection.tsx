@@ -5,7 +5,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const FOOTER_LOGO_URL = "/logo.png";
+const FOOTER_LOGO_URL = "/logo-footer.png";
 
 function useReveal(delay = 0) {
   const ref = useRef<HTMLDivElement>(null);
