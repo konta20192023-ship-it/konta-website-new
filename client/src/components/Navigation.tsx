@@ -52,7 +52,6 @@ export default function Navigation() {
               src={NEW_LOGO_URL}
               alt="株式会社權田"
               className="h-9 md:h-11 w-auto object-contain"
-              style={{ filter: "none", imageRendering: "crisp-edges" }}
             />
           </a>
 

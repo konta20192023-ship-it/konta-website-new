@@ -200,8 +200,7 @@ export default function ContactSection() {
               <img
                 src={FOOTER_LOGO_URL}
                 alt="株式会社權田"
-                className="h-12 md:h-18 w-auto object-contain"
-                style={{ filter: "none" }}
+                className="h-9 md:h-11 w-auto object-contain"
               />
             </div>
             <p className="font-['Cormorant_Garamond'] text-base font-light text-white/50 italic leading-relaxed">
